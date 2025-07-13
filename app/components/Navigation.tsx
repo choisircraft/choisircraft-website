@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Check, Menu, X } from "lucide-react"
+import Image from "next/image"
+import { Menu, X } from "lucide-react"
 
 interface NavigationProps {
   currentPage: string
@@ -37,21 +38,16 @@ export default function Navigation({ currentPage, setCurrentPage }: NavigationPr
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center cursor-pointer group" onClick={() => setCurrentPage("home")}>
-            <div className="relative">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
-                <Check className="w-6 h-6 text-white animate-pulse" />
-              </div>
-              {/* Floating particles */}
-              <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-400 rounded-full animate-ping opacity-75"></div>
-              <div className="absolute -bottom-1 -left-1 w-1.5 h-1.5 bg-green-500 rounded-full animate-bounce delay-300"></div>
-            </div>
-            <div className="ml-3">
-              <span className="text-xl font-bold text-gray-800 group-hover:text-green-600 transition-colors duration-300">
-                CHOISIR
-              </span>
-              <span className="text-xl font-bold text-green-600 ml-1 animate-pulse">CRAFT</span>
-            </div>
+          <div className="flex items-center cursor-pointer" onClick={() => setCurrentPage("home")}>
+            <Image
+              src="/choisircraft_logo_transparent.png" 
+              alt="Choisir Craft Logo"
+              width={400} 
+              height={200}
+              // === CHANGE IS HERE: Increased h-10 to h-12 ===
+              className="h-12 w-auto transition-transform duration-300 hover:scale-105" 
+              priority
+            />
           </div>
 
           {/* Desktop Navigation */}

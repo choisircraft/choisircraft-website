@@ -1,11 +1,14 @@
 "use client"
 
-import { Check, Phone, Mail, MapPin, ArrowRight } from "lucide-react"
+// 1. Make sure you import the icons you need
+import Image from "next/image"
+import { Check, Phone, Mail, MapPin, ArrowRight, Linkedin, Instagram, Twitter } from "lucide-react"
 
 interface FooterProps {
   setCurrentPage: (page: string) => void
 }
 
+// Component function name correctly capitalized to 'Footer'
 export default function Footer({ setCurrentPage }: FooterProps) {
   const quickLinks = [
     { id: "about", label: "About Us" },
@@ -23,58 +26,58 @@ export default function Footer({ setCurrentPage }: FooterProps) {
     "Cloud Solutions",
   ]
 
+  const socialLinks = [
+    { Icon: Mail, href: "mailto:choisircraft@gmail.com", name: "Email" },
+    { Icon: Phone, href: "https://api.whatsapp.com/send/?phone=919744849679", name: "WhatsApp" },
+    { Icon: Linkedin, href: "#", name: "LinkedIn" }, // Add your LinkedIn URL
+    { Icon: Instagram, href: "#", name: "Instagram" }, // Add your Instagram URL
+  ]
+
   return (
-    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative overflow-hidden">
-      {/* Background Animation */}
-      <div className="absolute inset-0">
-        {[...Array(10)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 bg-green-400 rounded-full animate-float opacity-20"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${3 + Math.random() * 4}s`,
-            }}
-          />
-        ))}
+    <footer className="bg-gradient-to-t from-gray-50 to-white text-gray-800 relative pt-20">
+      {/* Elegant Wave Divider SVG */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none">
+        <svg
+          data-name="Layer 1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+          className="relative block w-full h-[100px] fill-current text-white"
+        >
+          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+        </svg>
       </div>
 
       <div className="relative z-10">
         {/* Main Footer Content */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+
             {/* Company Info */}
             <div className="lg:col-span-1">
-              <div className="flex items-center mb-6 group cursor-pointer" onClick={() => setCurrentPage("home")}>
-                <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mr-3 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
-                  <Check className="w-7 h-7 text-white" />
-                </div>
-                <div>
-                  <span className="text-2xl font-bold group-hover:text-green-400 transition-colors duration-300">
-                    CHOISIR
-                  </span>
-                  <span className="text-2xl font-bold text-green-400 ml-1">CRAFT</span>
-                </div>
+              <div className="mb-6 cursor-pointer" onClick={() => setCurrentPage("home")}>
+                <Image
+                  src="/choisircraft_logo_transparent.png"
+                  alt="Choisir Craft Logo"
+                  width={150}
+                  height={75}
+                  className="h-12 w-auto"
+                />
               </div>
-              <p className="text-gray-300 leading-relaxed mb-6">
-                Transforming businesses with cutting-edge technology solutions. We specialize in creating innovative
-                digital experiences that drive growth and success.
+              <p className="text-gray-600 leading-relaxed mb-6">
+                Transforming businesses with cutting-edge technology solutions and innovative digital experiences that drive growth.
               </p>
-              <div className="flex space-x-4">
-                {[
-                  { icon: "📧", link: "mailto:choisircraft@gmail.com" },
-                  { icon: "📱", link: "https://api.whatsapp.com/send/?phone=919744849679" },
-                  { icon: "💼", link: "#" },
-                  { icon: "🔗", link: "#" },
-                ].map((social, index) => (
+              <div className="flex space-x-3">
+                {socialLinks.map((social, index) => (
                   <a
                     key={index}
-                    href={social.link}
-                    className="w-10 h-10 bg-gray-700 hover:bg-green-600 rounded-lg flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:-translate-y-1"
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.name}
+                    className="w-10 h-10 bg-sky-100 text-sky-600 rounded-lg flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:bg-sky-200"
                   >
-                    <span className="text-lg">{social.icon}</span>
+                    <social.Icon className="w-5 h-5" />
                   </a>
                 ))}
               </div>
@@ -82,18 +85,17 @@ export default function Footer({ setCurrentPage }: FooterProps) {
 
             {/* Quick Links */}
             <div>
-              <h4 className="text-xl font-semibold text-green-400 mb-6 relative">
+              <h4 className="text-lg font-semibold text-gray-800 mb-6 border-l-4 border-sky-500 pl-4">
                 Quick Links
-                <div className="absolute -bottom-2 left-0 w-12 h-1 bg-green-400 rounded-full"></div>
               </h4>
               <div className="space-y-3">
-                {quickLinks.map((link, index) => (
+                {quickLinks.map((link) => (
                   <button
                     key={link.id}
                     onClick={() => setCurrentPage(link.id)}
-                    className="flex items-center text-gray-300 hover:text-green-400 transition-all duration-300 group"
+                    className="flex items-center text-gray-600 hover:text-sky-600 transition-all duration-300 group"
                   >
-                    <ArrowRight className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform duration-300" />
+                    <ArrowRight className="w-4 h-4 mr-2 text-sky-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:translate-x-1" />
                     {link.label}
                   </button>
                 ))}
@@ -102,17 +104,13 @@ export default function Footer({ setCurrentPage }: FooterProps) {
 
             {/* Services */}
             <div>
-              <h4 className="text-xl font-semibold text-green-400 mb-6 relative">
+              <h4 className="text-lg font-semibold text-gray-800 mb-6 border-l-4 border-sky-500 pl-4">
                 Our Services
-                <div className="absolute -bottom-2 left-0 w-12 h-1 bg-green-400 rounded-full"></div>
               </h4>
               <div className="space-y-3">
-                {services.map((service, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center text-gray-300 hover:text-green-400 transition-colors duration-300 cursor-pointer group"
-                  >
-                    <div className="w-2 h-2 bg-green-400 rounded-full mr-3 group-hover:scale-150 transition-transform duration-300"></div>
+                {services.map((service) => (
+                  <div key={service} className="flex items-center text-gray-600">
+                    <Check className="w-4 h-4 text-sky-500 mr-2 flex-shrink-0" />
                     {service}
                   </div>
                 ))}
@@ -121,48 +119,38 @@ export default function Footer({ setCurrentPage }: FooterProps) {
 
             {/* Contact Info */}
             <div>
-              <h4 className="text-xl font-semibold text-green-400 mb-6 relative">
-                Contact Info
-                <div className="absolute -bottom-2 left-0 w-12 h-1 bg-green-400 rounded-full"></div>
+              <h4 className="text-lg font-semibold text-gray-800 mb-6 border-l-4 border-sky-500 pl-4">
+                Get in Touch
               </h4>
               <div className="space-y-4">
+                {/* Phone Section */}
                 <div className="flex items-start space-x-3 group">
-                  <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-10 h-10 bg-sky-100 text-sky-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-sky-200 transition-all duration-300">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">Phone</p>
-                    <a
-                      href="tel:+919495257093"
-                      className="text-white hover:text-green-400 transition-colors duration-300"
-                    >
-                      +91 94952 57093
-                    </a>
+                    <p className="text-gray-500 text-sm">Phone</p>
+                    <p className="text-gray-700 group-hover:text-sky-600 transition-colors duration-300">+91 94952 57093</p>
                   </div>
                 </div>
-
+                {/* Email Section */}
                 <div className="flex items-start space-x-3 group">
-                  <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-10 h-10 bg-sky-100 text-sky-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-sky-200 transition-all duration-300">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">Email</p>
-                    <a
-                      href="mailto:choisircraft@gmail.com"
-                      className="text-white hover:text-green-400 transition-colors duration-300"
-                    >
-                      choisircraft@gmail.com
-                    </a>
+                    <p className="text-gray-500 text-sm">Email</p>
+                    <p className="text-gray-700 group-hover:text-sky-600 transition-colors duration-300">choisircraft@gmail.com</p>
                   </div>
                 </div>
-
+                {/* Location Section */}
                 <div className="flex items-start space-x-3 group">
-                  <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-10 h-10 bg-sky-100 text-sky-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-sky-200 transition-all duration-300">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">Location</p>
-                    <p className="text-white">India</p>
+                    <p className="text-gray-500 text-sm">Location</p>
+                    <p className="text-gray-700">Kerala, India</p>
                   </div>
                 </div>
               </div>
@@ -171,22 +159,15 @@ export default function Footer({ setCurrentPage }: FooterProps) {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-700">
+        <div className="border-t border-gray-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <p className="text-gray-400 text-sm mb-4 md:mb-0">
-                &copy; 2024 Choisir Craft. All rights reserved. Made with ❤️ in India
+            <div className="flex flex-col md:flex-row justify-between items-center text-sm">
+              <p className="text-gray-500 mb-4 md:mb-0">
+                © {new Date().getFullYear()} Choisir Craft. All rights reserved.
               </p>
-              <div className="flex space-x-6 text-sm">
-                <a href="#" className="text-gray-400 hover:text-green-400 transition-colors duration-300">
-                  Privacy Policy
-                </a>
-                <a href="#" className="text-gray-400 hover:text-green-400 transition-colors duration-300">
-                  Terms of Service
-                </a>
-                <a href="#" className="text-gray-400 hover:text-green-400 transition-colors duration-300">
-                  Cookie Policy
-                </a>
+              <div className="flex space-x-6">
+                <a href="#" className="text-gray-500 hover:text-sky-600 transition-colors duration-300">Privacy Policy</a>
+                <a href="#" className="text-gray-500 hover:text-sky-600 transition-colors duration-300">Terms of Service</a>
               </div>
             </div>
           </div>

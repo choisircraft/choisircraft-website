@@ -1,0 +1,468 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 1s ease-out;
+}
+
+.animation-delay-300 {
+  animation-delay: 0.3s;
+  animation-fill-mode: both;
+}
+
+.animation-delay-600 {
+  animation-delay: 0.6s;
+  animation-fill-mode: both;
+}
+
+.animation-delay-900 {
+  animation-delay: 0.9s;
+  animation-fill-mode: both;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-typewriter {
+  animation: typewriter 2s steps(20) 1s both;
+}
+
+.animate-blink {
+  animation: blink 1s infinite;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4caf50;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #45a049;
+}
+
+/* Line clamp utility */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Gradient backgrounds */
+.bg-gradient-green {
+  background: linear-gradient(135deg, #4caf50, #45a049);
+}
+
+.bg-gradient-blue {
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+}
+
+.bg-gradient-purple {
+  background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+}
+
+.bg-gradient-orange {
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Button animations */
+.btn-animate {
+  transition: all 0.3s ease;
+}
+
+.btn-animate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Loading animation */
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+  .text-responsive {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .text-responsive {
+    font-size: 1.25rem;
+  }
+}
+
+/* Custom animations for specific elements */
+.animate-bounce-slow {
+  animation: bounce 2s infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s infinite;
+}
+
+.animate-spin-slow {
+  animation: spin 3s linear infinite;
+}
+
+/* Particle animations */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.particle-1 {
+  animation: float 6s ease-in-out infinite;
+}
+
+.particle-2 {
+  animation: float 8s ease-in-out infinite reverse;
+}
+
+.particle-3 {
+  animation: float 10s ease-in-out infinite;
+}
+
+/* Text gradient */
+.text-gradient {
+  background: linear-gradient(135deg, #4caf50, #45a049);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Backdrop blur support */
+.backdrop-blur-custom {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* --- Global CSS Adjustments --- */
+
+body {
+  min-height: 100vh;
+}
+
+/* --- Animations for various sections --- */
+
+/* Hero Slider Float */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+/* Fading Animations for Hero */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up { animation: fadeInUp 1s ease-out forwards; }
+.animation-delay-300 { animation-delay: 0.3s; }
+.animation-delay-600 { animation-delay: 0.6s; }
+.animation-delay-900 { animation-delay: 0.9s; }
+
+/* Pricing Section Animations */
+@keyframes pulse { 0% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.2); opacity: 0.3; } 100% { transform: scale(1); opacity: 0.7; }}
+.animate-pulse { animation: pulse 2s infinite ease-in-out; }
+@keyframes ping { 0% { transform: scale(0.9); opacity: 1; } 70% { transform: scale(1.8); opacity: 0; } 100% { transform: scale(1.9); opacity: 0; }}
+.animate-ping { animation: ping 2s infinite cubic-bezier(0, 0, 0.2, 1); }
+@keyframes bounce { 0%, 100% { transform: translateY(-25%); animation-timing-function: cubic-bezier(0.8,0,1,1); } 50% { transform: none; animation-timing-function: cubic-bezier(0,0,0.2,1); }}
+.animate-bounce { animation: bounce 3s infinite; }
+
+/* --- Futuristic Clients Section Specific Animations --- */
+
+/* Pulsing Grid */
+@keyframes pulse-grid {
+  0% { opacity: 0.05; }
+  50% { opacity: 0.15; }
+  100% { opacity: 0.05; }
+}
+.animate-pulse-grid {
+  animation: pulse-grid 4s infinite ease-in-out;
+}
+
+/* Glitchy Particle Animation */
+@keyframes glitch-particles {
+  0% { transform: translate(0px, 0px) scale(1); opacity: 0.6; }
+  20% { transform: translate(-2px, 2px) scale(0.8); opacity: 0.4; }
+  40% { transform: translate(2px, -2px) scale(1); opacity: 0.6; }
+  60% { transform: translate(-1px, 1px) scale(0.9); opacity: 0.5; }
+  80% { transform: translate(1px, -1px) scale(1); opacity: 0.7; }
+  100% { transform: translate(0px, 0px) scale(1); opacity: 0.6; }
+}
+.animate-glitch-particles {
+  animation: glitch-particles 3s infinite ease-in-out;
+}
+.delay-1000 { animation-delay: 1s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-1500 { animation-delay: 1.5s; }
+
+
+/* Basic Grid Background Pattern (for the dark section) */
+.bg-grid-pattern {
+  background-image: linear-gradient(to right, rgba(59, 130, 246, 0.15) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(59, 130, 246, 0.15) 1px, transparent 1px);
+  background-size: 40px 40px; /* Adjust grid spacing */
+}
+
+/* Core 3D Transformation Helpers for Clients Section */
+.perspective-container-client {
+  perspective: 1500px; /* Crucial for 3D transforms */
+}
+
+.carousel-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.17, 1); /* Smooth carousel movement */
+}
+
+.client-card-futuristic {
+  position: absolute; /* Absolutely position each card to allow precise 3D placement */
+  transform-style: preserve-3d; /* Children should inherit 3D space */
+  /* Transitioning transform properties */
+  transition: transform 0.8s cubic-bezier(0.77, 0, 0.17, 1),
+              opacity 0.8s cubic-bezier(0.77, 0, 0.17, 1),
+              scale 0.8s cubic-bezier(0.77, 0, 0.17, 1);
+}
+
+/* Glowing ring effect */
+.glow-ring {
+  /* Adjust for visual appeal */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: inherit; /* Inherit rounding from parent */
+}
+
+.animate-glow {
+  animation: glow-pulse 2s infinite ease-in-out alternate;
+}
+
+@keyframes glow-pulse {
+  0% { opacity: 0.3; filter: blur(8px); transform: scale(0.95); }
+  50% { opacity: 0.8; filter: blur(15px); transform: scale(1.02); }
+  100% { opacity: 0.3; filter: blur(8px); transform: scale(0.95); }
+}
+
+/* Explicit transform handling if Tailwind classes interfere */
+.client-card-futuristic {
+  transform-origin: center center;
+}
+
+.perspective-container-client {
+  perspective: 1500px; /* Crucial for 3D transforms */
+}
+
+.carousel-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.17, 1); /* Smooth carousel movement */
+}
+
+.client-card-futuristic {
+  position: absolute; /* Absolutely position each card to allow precise 3D placement */
+  transform-style: preserve-3d; /* Children should inherit 3D space */
+  /* Transitioning transform properties */
+  transition: transform 0.8s cubic-bezier(0.77, 0, 0.17, 1),
+              opacity 0.8s cubic-bezier(0.77, 0, 0.17, 1),
+              scale 0.8s cubic-bezier(0.77, 0, 0.17, 1);
+}
+
+/* Glowing ring effect */
+.glow-ring {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: inherit; /* Inherit rounding from parent */
+}
+
+.animate-glow {
+  animation: glow-pulse 2s infinite ease-in-out alternate;
+}
+
+@keyframes glow-pulse {
+  0% { opacity: 0.3; filter: blur(8px); transform: scale(0.95); }
+  50% { opacity: 0.8; filter: blur(15px); transform: scale(1.02); }
+  100% { opacity: 0.3; filter: blur(8px); transform: scale(0.95); }
+}
+
+/* Explicit transform handling if Tailwind classes interfere */
+.client-card-futuristic {
+  transform-origin: center center;
+}
+
+/* --- Adjusted styling for LARGER image containers and text --- */
+
+/* We are scaling the `.client-card-futuristic` which contains the logo image
+   and its wrapper div. The JSX applies the dynamic `scaleFactor`.
+   Here we define a larger base size and specific styles for the logo's visual wrapper. */
+
+.client-card-futuristic .relative.w-full.h-full.flex.items-center.justify-center.rounded-lg.overflow-hidden.shadow-xl.bg-gradient-to-br { /* Target the Image container div more specifically */
+  /* These widths/heights are base values, they get scaled by `scaleFactor` in JSX */
+  width: 250px;  /* Increased from 200px */
+  height: 165px; /* Increased from 130px */
+  border-radius: 12px; /* Slightly more rounded for larger cards */
+  margin: 10px 0; /* Add some vertical spacing */
+}
+
+/* Ensure the Image component itself fits within this scaled container */
+.client-card-futuristic .relative .w-full.h-full.flex.items-center.justify-center.rounded-lg.overflow-hidden.shadow-xl.bg-gradient-to-br img {
+  /* Ensure it respects the parent's scaling and object-fit */
+  object-fit: contain; /* Should be handled by Image component, but good to ensure */
+}
+
+
+/* Demo text styling */
+.client-info-text {
+  margin-top: 16px; /* Increased margin top for more space */
+  padding: 0 20px; /* Increased horizontal padding */
+  width: 100%;
+  text-align: center;
+  /* Ensure it is properly placed and scaled within the 3D card context */
+}
+
+.client-info-text h3 {
+  font-size: 1.375rem; /* Larger heading (text-xl => text-lg: 1.125rem, text-xl: 1.25rem, text-2xl: 1.5rem) - using 1.375 for a custom feel. Or use text-2xl. */
+  font-weight: 700; /* font-bold */
+  color: #81dafd; /* cyan-300 */
+  margin-bottom: 0.25rem;
+}
+
+.client-info-text p {
+  font-size: 0.9375rem; /* text-base.5 - slightly larger than text-sm */
+  color: #9ca3af; /* gray-400 */
+}
+
+.client-info-text a {
+  font-size: 0.8125rem; /* text-sm */
+  color: #6b7280; /* gray-500 */
+}
+.client-info-text a:hover {
+  color: #22d3ee; /* cyan-400 */
+}
+
+/* Ensure elements within the card have proper Z-indexing for 3D context */
+.client-card-futuristic * {
+  transform-style: preserve-3d;
+}
+.client-card-futuristic > div > div { /* Targeting the outer wrapper div that holds the Image and potentially text */
+  z-index: 5; /* Default for non-active cards */
+}
+.client-card-futuristic > div > div .group /* Ensure the img is also layered correctly if it has any transformation */ {
+   z-index: 5; /* Ensure img container gets the correct z-index */
+}
+
+.client-card-futuristic.active { /* Applied via JS */
+  z-index: 10;
+}

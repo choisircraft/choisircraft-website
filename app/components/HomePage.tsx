@@ -673,7 +673,7 @@ function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
             <span className="inline-block px-6 py-3 bg-emerald-100 text-emerald-800 rounded-full text-base font-semibold mb-4 animate__animated animate__fadeInDown">
-              Our Work
+              Our Works
             </span>
             <h2 className="text-5xl font-extrabold text-gray-900 mb-4 animate__animated animate__zoomIn">Project Showcase</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto animate__animated animate__fadeInUp animate__delay-1s">

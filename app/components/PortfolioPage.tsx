@@ -19,7 +19,7 @@ import {
 export default function PortfolioPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContentUrl, setModalContentUrl] = useState("");
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [showIframeModal, setShowIframeModal] = useState(false); // State for iframe modal
   const iframeRef = useRef(null); // Ref for iframe element
 
@@ -71,11 +71,11 @@ export default function PortfolioPage() {
     },
     {
       id: 3,
-      title: "Mahesh GATHERAN (Portrait Artist)",
+      title: "Mahesh GANGADHARAN (Portrait Artist)",
       description:
         "Artist portfolio website to showcase his renowned portrait works and facilitate inquiries.",
       longDescription:
-        "Mahesh GATHERAN, a celebrated portrait artist, needed a sophisticated digital gallery to display his impressive body of work. We created a visually stunning portfolio website that highlights his artistry with high-resolution image galleries, detailed project descriptions, and an intuitive interface for potential clients to inquire about commissions. The design reflects the elegance and skill of his portraits.",
+        "Mahesh GANGADHARAN, a celebrated portrait artist, needed a sophisticated digital gallery to display his impressive body of work. We created a visually stunning portfolio website that highlights his artistry with high-resolution image galleries, detailed project descriptions, and an intuitive interface for potential clients to inquire about commissions. The design reflects the elegance and skill of his portraits.",
       coverImage: "/maheshgangatharan.png",
       technologies: ["Vue.js", "Laravel", "MySQL"],
       features: [
@@ -87,7 +87,7 @@ export default function PortfolioPage() {
       ],
       websiteUrl: "https://sirajbinsyed.github.io/mahesh/",
       githubUrl: "https://github.com/sirajbinsyed/mahesh",
-      client: "Mahesh GATHERAN, Portrait Artist",
+      client: "Mahesh GANGADHARAN, Portrait Artist",
     },
   ];
 
@@ -108,17 +108,41 @@ export default function PortfolioPage() {
       "https://sirajbinsyed.github.io/restaurant_menu_system_plans/", // URL for the concept demo
   };
 
-  const openProjectModal = (project) => {
+  type Project = {
+    id: number;
+    title: string;
+    description: string;
+    longDescription: string;
+    coverImage: string;
+    technologies: string[];
+    features: string[];
+    websiteUrl: string | null;
+    githubUrl: string | null;
+    client: string;
+  };
+
+  const openProjectModal = (project: Project) => {
     setModalContentUrl(project.websiteUrl || "");
     setIsModalOpen(true);
     setSelectedProject(project);
     setShowIframeModal(false); // Ensure iframe modal is closed when opening project modal
   };
 
-  const openConceptModal = (concept) => {
+  const openConceptModal = (concept: typeof digitalMenuConcept) => {
     setModalContentUrl(concept.externalLinkUrl); // This will be the iframe URL
     setShowIframeModal(true); // Open the iframe modal
-    setSelectedProject(concept); // Set selected project for title and description
+    setSelectedProject({
+      id: 999,
+      title: concept.title,
+      description: concept.description,
+      longDescription: concept.description,
+      coverImage: "/placeholder.svg",
+      technologies: [],
+      features: concept.features,
+      websiteUrl: concept.externalLinkUrl,
+      githubUrl: null,
+      client: "Concept Demo",
+    }); // Set selected project for title and description
     setIsModalOpen(false); // Close the other modal if it was open
   };
 
@@ -182,8 +206,9 @@ export default function PortfolioPage() {
                     objectFit="contain"
                     className="group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
-                      e.target.srcset = defaultImage;
-                      e.target.src = defaultImage;
+                      const img = e.target as HTMLImageElement;
+                      img.srcset = defaultImage;
+                      img.src = defaultImage;
                     }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
@@ -329,8 +354,9 @@ export default function PortfolioPage() {
                       objectFit="contain"
                       className="hover:scale-105 transition-transform duration-500"
                       onError={(e) => {
-                        e.target.srcset = defaultImage;
-                        e.target.src = defaultImage;
+                        const img = e.target as HTMLImageElement;
+                        img.srcset = defaultImage;
+                        img.src = defaultImage;
                       }}
                     />
                   </div>

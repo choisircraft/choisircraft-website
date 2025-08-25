@@ -124,7 +124,7 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Phone, ChevronDown } from "lucide-react"
 
 interface NavigationProps {
   currentPage: string
@@ -134,10 +134,11 @@ interface NavigationProps {
 export default function Navigation({ currentPage, setCurrentPage }: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+      setIsScrolled(window.scrollY > 10)
     }
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
@@ -153,58 +154,77 @@ export default function Navigation({ currentPage, setCurrentPage }: NavigationPr
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white shadow-md" : "bg-white"
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+        isScrolled 
+          ? "bg-white/95 backdrop-blur-md shadow-lg py-2" 
+          : "bg-white/90 backdrop-blur-sm py-3"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <div className="flex items-center cursor-pointer" onClick={() => setCurrentPage("home")}>
+        <div className="flex justify-between items-center">
+          {/* Logo (Left) */}
+          <div 
+            className="flex-shrink-0 flex items-center cursor-pointer transition-all duration-300 hover:scale-105"
+            onClick={() => setCurrentPage("home")}
+          >
             <Image
-              src="/choisircraft_logo_transparent.png" 
+              src="/choisircraft_logo_transparent.png"
               alt="Choisir Craft Logo"
-              width={400} 
-              height={200}
-              className="h-12 w-auto transition-transform duration-300 hover:scale-105" 
+              width={160}
+              height={60}
+              className="h-10 w-auto md:h-12"
               priority
             />
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-1">
+          {/* Center Navigation */}
+          <div className="hidden lg:flex absolute left-1/2 transform -translate-x-1/2">
+            <div className="flex items-center space-x-1 bg-white/80 backdrop-blur-sm rounded-2xl p-1.5 shadow-sm border border-gray-100">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => setCurrentPage(item.id)}
-                  className={`relative px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 ${
+                  onMouseEnter={() => setHoveredItem(item.id)}
+                  onMouseLeave={() => setHoveredItem(null)}
+                  className={`relative px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
                     currentPage === item.id
-                      ? "bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg"
-                      : "text-gray-700 hover:bg-gray-100"
+                      ? "bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-lg shadow-emerald-200"
+                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                   }`}
                 >
                   {item.label}
+                  {(hoveredItem === item.id || currentPage === item.id) && (
+                    <div className={`absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full bg-emerald-500 ${currentPage === item.id ? "animate-pulse" : ""}`}></div>
+                  )}
                 </button>
               ))}
             </div>
           </div>
 
+          {/* Right Side Contact */}
+          <div className="hidden md:flex ml-auto flex-shrink-0 items-center">
+            <div className="flex items-center space-x-2 bg-gradient-to-r from-emerald-50 to-cyan-50 px-4 py-2.5 rounded-xl border border-emerald-100 shadow-sm">
+              <div className="bg-emerald-500 p-1.5 rounded-full">
+                <Phone className="h-4 w-4 text-white" />
+              </div>
+              <div>
+                <p className="text-xs font-medium text-gray-600">Available 24/7</p>
+                <p className="text-emerald-700 font-bold text-sm">+91 94952 57093</p>
+              </div>
+            </div>
+          </div>
+
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex-shrink-0 ml-4">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`p-2 rounded-lg transition-all duration-300 ${
-                isMenuOpen 
-                  ? "bg-gradient-to-r from-green-500 to-blue-500 text-white"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              className={`p-2.5 rounded-xl transition-all duration-300 ${
+                isMenuOpen
+                  ? "bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-lg"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-md"
               }`}
             >
-              {isMenuOpen ? (
-                <X className="w-5 h-5" />
-              ) : (
-                <Menu className="w-5 h-5" />
-              )}
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
@@ -212,12 +232,12 @@ export default function Navigation({ currentPage, setCurrentPage }: NavigationPr
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
+        className={`lg:hidden transition-all duration-500 ease-in-out overflow-hidden ${
           isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="bg-white border-t border-gray-200 shadow-lg">
-          <div className="px-4 py-3 space-y-2">
+        <div className="bg-white/95 backdrop-blur-md border-t border-gray-200/50 shadow-xl">
+          <div className="px-4 py-4 space-y-1">
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -225,15 +245,31 @@ export default function Navigation({ currentPage, setCurrentPage }: NavigationPr
                   setCurrentPage(item.id)
                   setIsMenuOpen(false)
                 }}
-                className={`block w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
+                className={`w-full text-left px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 flex items-center justify-between ${
                   currentPage === item.id
-                    ? "bg-gradient-to-r from-green-500 to-blue-500 text-white"
-                    : "text-gray-700 hover:bg-gray-100"
+                    ? "bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-md"
+                    : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
                 }`}
               >
                 {item.label}
+                {currentPage === item.id && (
+                  <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                )}
               </button>
             ))}
+
+            {/* Contact section in mobile menu */}
+            <div className="mt-4 pt-4 border-t border-gray-200/50">
+              <div className="flex items-center space-x-3 bg-gradient-to-r from-emerald-50 to-cyan-50 p-4 rounded-xl border border-emerald-100">
+                <div className="bg-emerald-500 p-2 rounded-full shadow-sm">
+                  <Phone className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-600">Call us anytime</p>
+                  <p className="text-emerald-700 font-bold">+91 94952 57093</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

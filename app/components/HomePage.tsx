@@ -100,8 +100,8 @@ export default function HomePage() {
       id: 3,
       title: "Zafera Spices (Distributed Company)",
       coverImage: "/zaferaspices.png",
-      websiteUrl: "https://bosco-bags-6qb4.vercel.app/",
-      client: "Mahesh GANGADHARAN, Portrait Artist",
+      websiteUrl: "https://v0-spice-website-design-rdyx.vercel.app/",
+      client: "Zafera Spices, Pattambi,pallippuram",
       category: "Website"
     }
   ]
